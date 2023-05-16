@@ -1,4 +1,4 @@
-import AdminLayout from "@/layouts/admin-layouts";
+import AdminLayout from "@/layouts/admin-layout";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";

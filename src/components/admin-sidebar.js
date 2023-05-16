@@ -18,13 +18,6 @@ export default function AdminSidebar() {
       icon: "books",
     },
     {
-      name: "Chapters",
-      link: "/admin/chapters",
-      have_submenu: false,
-      sub_menus: null,
-      icon: "book",
-    },
-    {
       name: "Data Master",
       link: "/admin/data-master",
       have_submenu: false,
@@ -63,8 +56,7 @@ export default function AdminSidebar() {
                   className="w-full flex gap-2 items-center hover:bg-[rgba(255,255,255,0.1)] transition-all duration-100 ease-in-out rounded-lg"
                   key={ind}
                 >
-                  <div className="w-11 h-11 flex items-center justify-center">
-                  </div>
+                  <div className="w-11 h-11 flex items-center justify-center"></div>
                   <div className="font-sm">{sm.name}</div>
                 </Link>
               ))}

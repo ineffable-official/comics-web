@@ -1,5 +1,6 @@
 import AdminCard from "@/components/admin-card";
-import AdminLayout from "@/layouts/admin-layouts";
+import ComicForm from "@/components/comic-form";
+import AdminLayout from "@/layouts/admin-layout";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 
@@ -24,6 +25,7 @@ export default function Comics() {
   return (
     <AdminLayout>
       <div className="text-xl">Comics</div>
+      <ComicForm comic={1}/>
       <div className="mt-8 grid grid-cols-4 gap-4">
         {comics !== null &&
           comics.map((c) => <AdminCard data={c} key={c.id} />)}

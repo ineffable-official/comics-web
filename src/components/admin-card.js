@@ -9,7 +9,7 @@ export default function AdminCard({ data }) {
     >
       <picture>
         <img
-          src="https://xfs-s114.batcg.org/thumb/W600/ampi/238/23853a4b110c2c0c632fd1e61bebd23ac7dee3a9_512_728_244673.jpeg?acc=ga30DMRpKCiUtKLnQ4ldMQ&exp=1683911851"
+          src={data.images}
           alt=""
         />
       </picture>
