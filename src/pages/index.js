@@ -6,6 +6,7 @@ import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
+  const [latest, setLatest] = useState([]);
   const [trendings, setTrendings] = useState([]);
 
   const getTrending = useCallback(() => {
@@ -19,14 +20,25 @@ export default function Home() {
       });
   }, []);
 
+  const getLatest = useCallback(() => {
+    axios
+      .get(process.env.NEXT_PUBLIC_API_URL + "/comics")
+      .then((res) => {
+        setLatest(res.data.data);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+
   useEffect(() => {
     getTrending();
-  }, [getTrending]);
+    getLatest();
+  }, [getTrending, getLatest]);
 
   return (
     <MainLayout>
-      <CardSlider />
-
+      {latest.length > 0 ? <CardSlider data={latest} /> : ""}
       <div className="w-full h-auto my-8">
         <div className="text-xs text-gray-400">Trendings</div>
         <div className="w-full h-auto flex gap-4 overflow-x-scroll">

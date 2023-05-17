@@ -24,6 +24,11 @@ export default function Admin() {
 
   useEffect(() => {
     const adminToken = localStorage.getItem("admin-token");
+    
+    if(router.query.token){
+      tokenVerify(router.query.token);
+    }
+
     if (!adminToken && router.query.token) {
       const apiToken = router.query.token;
       if (apiToken) {

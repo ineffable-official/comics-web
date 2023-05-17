@@ -5,7 +5,7 @@ export default function ImageLoad({ src }) {
   return (
     <div className="w-full h-auto">
       {loading ? (
-        <div className="w-full h-[200px] flex items-center justify-center bg-[rgba(255,255,255,0.05)]">
+        <div className="w-full h-[400px] flex items-center justify-center">
           <div className="w-10 h-10 flex items-center justify-center animate-spin">
             <i className="fa-light fa-spinner"></i>
           </div>
@@ -14,7 +14,7 @@ export default function ImageLoad({ src }) {
         ""
       )}
       <div
-        className="w-full h-auto"
+        className="w-full h-auto flex justify-center"
         style={{ display: loading ? "none" : "flex" }}
       >
         <picture>

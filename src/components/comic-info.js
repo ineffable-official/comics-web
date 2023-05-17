@@ -1,16 +1,16 @@
 import moment from "moment";
 import GenreBox from "./genre-box";
 
-export default function AdminComicInfo({ comic }) {
+export default function ComicInfo({ comic }) {
   return (
-    <div className="w-auto h-auto bg-[rgba(255,255,255,0.1)] rounded-xl p-4 flex transition-all duration-500 ease-in-out">
-      <div className="w-[200px] h-fit flex items-center justify-center rounded-xl overflow-hidden">
+    <div className="w-auto h-auto bg-[rgba(255,255,255,0.1)] rounded-xl p-8 flex transition-all duration-500 ease-in-out">
+      <div className="w-[400px] h-fit flex items-center justify-center rounded-xl overflow-hidden">
         <picture>
-          <img src={comic.images} alt="" />
+          <img src={comic.images} className="w-full h-auto" alt="" />
         </picture>
       </div>
       <div
-        className={`w-full h-auto overflow-hidden flex flex-col text-xs transition-all duration-500 ease-in-out text-gray-300`}
+        className={`w-full h-auto overflow-hidden flex flex-col text-xs transition-all duration-500 ease-in-out text-gray-300 px-8`}
       >
         <div className="grid grid-cols-12">
           <div className="w-full h-12 flex items-center px-4 col-span-4">

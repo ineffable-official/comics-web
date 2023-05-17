@@ -10,10 +10,13 @@ export default function ComicForm({ comic }) {
   const langSelectedRef = useRef(null);
   const oriLangInputRef = useRef(null);
   const oriLangSelectedRef = useRef(null);
+  const statusInputRef = useRef(null);
+  const statusSelectedRef = useRef(null);
   const [authors, setAuthors] = useState([]);
   const [artists, setArtists] = useState([]);
   const [lang, setLang] = useState([]);
   const [oriLang, setOriLang] = useState([]);
+  const [status, setStatus] = useState([]);
   const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState([]);
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -262,6 +265,41 @@ export default function ComicForm({ comic }) {
               type="hidden"
               name="ori_lang"
               ref={oriLangSelectedRef}
+              onChange={(e) => {}}
+            />
+          </div>
+          <div className="relative">
+            <input
+              type="text"
+              id="status"
+              placeholder="Status"
+              className="w-[128px] h-8 rounded-lg px-2 bg-[rgba(255,255,255,0.1)] text-xs outline-none focus:bg-[rgba(255,255,255,0.2)]"
+              onChange={(e) => {
+                searchData(e, "/statuses", setStatus);
+              }}
+              ref={statusInputRef}
+            />
+            {status !== null ? (
+              <div className="absolute w-full h-auto p-2 bg-[rgba(255,255,255,0.1)] top-10 rounded-lg">
+                {status.map((a) => (
+                  <div
+                    className="w-full h-auto py-2 flex items-center justify-center text-xs hover:bg-[rgba(255,255,255,0.1)] rounded-lg"
+                    key={a.id}
+                    onClick={(e) => {
+                      selectOption(statusInputRef, a, statusSelectedRef);
+                    }}
+                  >
+                    {a.name}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              ""
+            )}
+            <input
+              type="hidden"
+              name="status"
+              ref={statusSelectedRef}
               onChange={(e) => {}}
             />
           </div>
