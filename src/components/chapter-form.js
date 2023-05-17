@@ -55,9 +55,10 @@ export default function ChapterForm({ comic }) {
             id="vol-num"
             placeholder="Volume Number"
             className="w-[128px] h-8 rounded-lg px-2 bg-[rgba(255,255,255,0.1)] text-xs outline-none focus:bg-[rgba(255,255,255,0.2)]"
+            defaultValue="0"
           />
           <input
-            type="number"
+            type="text"
             name="chap_num"
             id="chap-num"
             placeholder="Chapter Number"

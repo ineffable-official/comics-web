@@ -10,7 +10,7 @@ export default function ReaderLayout({ children }) {
   return (
     <>
       <div
-        className="w-full h-screen overflow-hidden bg-[rgb(32,32,32)] text-white text-sm"
+        className="w-full h-screen overflow-hidden bg-[rgb(32,32,32)] text-white text-sm scroll-smooth"
         style={poppins.style}
       >
         <Navbar />

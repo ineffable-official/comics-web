@@ -81,14 +81,12 @@ export default function ComicForm({ comic }) {
 
   const selectGenre = (data) => {
     const gnr = genre;
-    genres.forEach((g) => {
-      if (gnr.includes(data.id)) {
-        var i = gnr.indexOf(data.id);
-        gnr.splice(i)
-      } else {
-        gnr.push(data.id);
-      }
-    });
+    if (gnr.includes(data.id)) {
+      var i = gnr.indexOf(data.id);
+      gnr.splice(i);
+    } else {
+      gnr.push(data.id);
+    }
     setGenre(gnr);
     forceUpdate();
   };
@@ -254,7 +252,14 @@ export default function ComicForm({ comic }) {
                       selectOption(oriLangInputRef, a, oriLangSelectedRef);
                     }}
                   >
-                    {a.name}
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 flex items-center justify-center rounded-full overflow-hidden">
+                        <picture>
+                          <img src={a.images} alt="" />
+                        </picture>
+                      </div>
+                      <div className="text-xs">{a.name}</div>
+                    </div>
                   </div>
                 ))}
               </div>
