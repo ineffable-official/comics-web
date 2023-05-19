@@ -14,7 +14,7 @@ export default function MainLayout({ children }) {
         style={poppins.style}
       >
         <Navbar />
-        <main className="w-full h-screen overflow-y-scroll px-16 pb-32">{children}</main>
+        <main className="w-full h-screen overflow-y-scroll lg:px-16 md:px-8 px-2 pb-32">{children}</main>
       </div>
     </>
   );

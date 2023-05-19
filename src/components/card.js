@@ -26,19 +26,19 @@ export default function Card({ data }) {
   return (
     <Link
       href={"/comics/view?id=" + data.id}
-      className="w-[300px] h-auto my-4 rounded-2xl overflow-hidden relative"
+      className="lg:w-[250px] min-w-[200px] h-auto my-4 rounded-2xl overflow-hidden relative"
     >
       <picture>
         <img src={data.images} className="w-full" alt="" />
       </picture>
 
       <div className="w-full h-auto p-4 absolute bottom-0 bg-gradient-to-b from-[rgba(0,0,0,0.1)] to-[#323232]">
-        <div className="text-xl font-semibold">{data.title}</div>
+        <div className="text-xl font-semibold truncate">{data.title}</div>
         <div className="grid grid-cols-3 gap-2 my-2">
           {lastChapter !== null &&
             lastChapter.map((c) => (
               <Link
-                href={"/read?chapid=" + c.id}
+                href={"/comics/read?chapid=" + c.id}
                 className="w-full h-auto py-1 px-2 text-[0.7rem] bg-[rgba(255,255,255,0.25)] rounded-lg hover:bg-[rgba(255,255,255,0.5)] transition-all duration-100 ease-in-out"
                 key={c.id}
               >

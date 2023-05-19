@@ -28,6 +28,7 @@ export default function DataMasterSection({
                   <button
                     type="submit"
                     className="text-[8px] ml-2 w-4 h-4 hover:bg-gray-300 rounded-md flex items-center justify-center dark:bg-[rgba(255,255,255,0.1)] dark:text-gray-300"
+                    onClick={(e)=>{dataDestroy(e, apiRoute, t.id)}}
                   >
                     <i className="fa-light fa-x"></i>
                   </button>

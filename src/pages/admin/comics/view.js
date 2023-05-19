@@ -22,6 +22,10 @@ export default function ComicView() {
       .get(process.env.NEXT_PUBLIC_API_URL + "/comics?id=" + router.query.id)
       .then((res) => {
         if (res.data.status) {
+          if (res.data.data === null) {
+            router.push("/admin/comics");
+            return;
+          }
           setComic(res.data.data);
         }
         setLoading1(false);
@@ -43,7 +47,7 @@ export default function ComicView() {
 
   return (
     <AdminLayout>
-      {!loading1 ? <AdminComicInfo comic={comic} /> : ""}
+      {!loading1 ? comic ? <AdminComicInfo comic={comic} /> : "" : ""}
       <div className="w-full mt-8 rounded-xl bg-[rgba(255,255,255,0.1)] p-4">
         <div className="flex flex-col">
           <div className="w-full flex gap-2 items-center">
@@ -61,7 +65,7 @@ export default function ComicView() {
           </div>
           {chapterForm ? <ChapterForm comic={comic} /> : ""}
         </div>
-        <AdminChapterList comic={comic} />
+        {comic ? <AdminChapterList comic={comic} /> : ""}
       </div>
     </AdminLayout>
   );

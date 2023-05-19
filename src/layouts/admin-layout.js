@@ -19,6 +19,7 @@ export default function AdminLayout({ children }) {
           <main className="w-full h-screen overflow-y-scroll px-16 py-8">
             {children}
           </main>
+          <div className="min-w-[300px] h-screen">I</div>
         </div>
       </div>
     </>

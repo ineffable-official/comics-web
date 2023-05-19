@@ -94,7 +94,7 @@ export default function AdminComicInfo({ comic }) {
             Latest updated at
           </div>
           <div className="w-full h-12 flex items-center px-4 col-span-8">
-            {moment().fromNow()}
+            {moment(comic.updated_at).fromNow()}
           </div>
         </div>
       </div>

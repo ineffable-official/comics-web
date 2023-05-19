@@ -30,7 +30,7 @@ export default function ChapterList({ comic }) {
       {chapters !== null &&
         chapters.map((c) => (
           <Link
-            href={`/read?chapid=${c.id}`}
+            href={`/comics/read?chapid=${c.id}`}
             className="w-full h-12 bg-[rgba(255,255,255,0.1)] flex items-center px-4 rounded-xl hover:bg-[rgba(255,255,255,0.25)] transition-all duration-100 ease-in-out"
             key={c.id}
           >

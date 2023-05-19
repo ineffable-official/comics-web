@@ -18,51 +18,37 @@ export default function Signup() {
     setLoading(true);
 
     const form = new FormData(e.target);
+    if (form.get("password") !== form.get("verify_password")) {
+      alert("Verification Password not same");
+      return;
+    }
 
     axios
-      .get(
-        process.env.NEXT_PUBLIC_BASE_API +
-          "/api/get_nonce/?controller=user&method=register"
-      )
+      .post(process.env.NEXT_PUBLIC_API_URL + `/signup`, form)
       .then((res) => {
-        axios
-          .get(
-            process.env.NEXT_PUBLIC_BASE_API +
-              `/api/user/register/?username=${form.get(
-                "username"
-              )}&email=${form.get("email")}&user_pass=${form.get(
-                "user_pass"
-              )}&display_name=${form.get("display_name")}&nonce=${
-                res.data.nonce
-              }`
-          )
-          .then((res2) => {
-            if (res2.data.status === "ok") {
-              localStorage.setItem("cookie", res2.data.cookie);
-              localStorage.setItem("cookie_admin", res2.data.cookie_admin);
-              localStorage.setItem("cookie_name", res2.data.cookie_name);
-              localStorage.setItem("user_id", res2.data.user_id);
-              localStorage.setItem("username", res2.data.username);
+        const t = setTimeout(() => {
+          setLoading(false);
+          if (res.data.status) {
+            if (res.data.data.user.role === "user") {
+              localStorage.setItem("token", res.data.data.token);
               router.push("/");
-              setLoading(false);
-              return;
+            } else {
+              router.push(`/admin?token=${res.data.data.token}`);
             }
-            setLoading(false);
-          })
-          .catch((err) => {
-            throw err;
-          });
+          } else {
+            alert(res.data.message);
+          }
+        }, 500);
+
+        return () => {
+          clearTimeout(t);
+        };
       })
       .catch((err) => {
         throw err;
       });
   };
 
-  const getNone = useCallback(() => {}, []);
-
-  useEffect(() => {
-    getNone();
-  }, [getNone]);
   return (
     <div
       className="w-screen h-screen flex items-center justify-center"
@@ -80,8 +66,8 @@ export default function Signup() {
             <div className="w-11 h-11 border-[1px] flex items-center justify-center rounded-l-lg text-gray-500"></div>
             <input
               type="text"
-              name="display_name"
-              id="display_name"
+              name="name"
+              id="name"
               placeholder="Yourname"
               className="border-[1px] w-[300px] h-11 border-l-0 px-4 outline-none rounded-r-lg text-sm"
             />
@@ -116,9 +102,21 @@ export default function Signup() {
             </div>
             <input
               type="password"
-              name="user_pass"
-              id="user_pass"
+              name="password"
+              id="password"
               placeholder="Password"
+              className="border-[1px] w-[300px] h-11 border-l-0 px-4 outline-none rounded-r-lg text-sm"
+            />
+          </div>
+          <div className="flex mb-2">
+            <div className="w-11 h-11 border-[1px] flex items-center justify-center rounded-l-lg text-gray-500">
+              <i className="fa-light fa-key"></i>
+            </div>
+            <input
+              type="password"
+              name="verify_password"
+              id="verify-password"
+              placeholder="Verification Password"
               className="border-[1px] w-[300px] h-11 border-l-0 px-4 outline-none rounded-r-lg text-sm"
             />
           </div>

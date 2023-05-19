@@ -12,8 +12,6 @@ const poppins = Poppins({
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -25,7 +23,6 @@ export default function Login() {
       .then((res) => {
         const t = setTimeout(() => {
           setLoading(false);
-          setResult(res.data);
           if (res.data.status) {
             if (res.data.data.user.role === "user") {
               localStorage.setItem("token", res.data.data.token);
@@ -33,6 +30,8 @@ export default function Login() {
             } else {
               router.push(`/admin?token=${res.data.data.token}`);
             }
+          } else {
+            alert(res.data.message);
           }
         }, 500);
 
@@ -57,13 +56,6 @@ export default function Login() {
         <div className="w-[300px] text-gray-500 text-sm my-4 text-center">
           Login untuk segera memulai obrolan dengan yang lainnya
         </div>
-        {result ? (
-          <div className="w-[300px] text-red-500 text-sm my-4 text-center">
-            {result.message}
-          </div>
-        ) : (
-          ""
-        )}
         <form className="mt-4" onSubmit={handleSubmit}>
           <div className="flex mb-2">
             <div className="w-11 h-11 border-[1px] flex items-center justify-center rounded-l-lg text-gray-500">

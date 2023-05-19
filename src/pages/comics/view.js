@@ -2,6 +2,7 @@ import ChapterList from "@/components/chapter-list";
 import ComicInfo from "@/components/comic-info";
 import MainLayout from "@/layouts/main-layout";
 import axios from "axios";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 
@@ -9,9 +10,9 @@ export default function ComicsPage() {
   const router = useRouter();
   const [comic, setComic] = useState([]);
 
-  const getComic = useCallback(() => {
+  const getComic = useCallback((comidId) => {
     axios
-      .get(process.env.NEXT_PUBLIC_API_URL + `/comics?id=${router.query.id}`)
+      .get(process.env.NEXT_PUBLIC_API_URL + `/comics?id=${comidId}`)
       .then((res) => {
         if (res.data.status) {
           setComic(res.data.data);
@@ -20,11 +21,13 @@ export default function ComicsPage() {
       .catch((err) => {
         throw err;
       });
-  }, [router.query.id]);
+  }, []);
 
   useEffect(() => {
-    getComic();
-  }, [getComic]);
+    if (router.query.id) {
+      getComic(router.query.id);
+    }
+  }, [getComic, router.query.id]);
 
   return (
     <MainLayout>

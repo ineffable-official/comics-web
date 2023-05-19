@@ -25,7 +25,15 @@ export default function AdminSidebar() {
     },
   ]);
   return (
-    <div className="w-[300px] h-screen p-2 flex flex-col">
+    <div className="min-w-[300px] h-screen p-2 flex flex-col bg-[rgb(24,24,24)]">
+      <Link
+        href={'/'}
+        className="w-full flex gap-2 items-center mb-2 transition-all duration-100 ease-in-out rounded-lg"
+      >
+        <div className="w-11 h-11 flex items-center justify-center">
+        </div>
+        <div className="font-sm text-xs text-gray-300">MY COMICS</div>
+      </Link>
       {menus !== null &&
         menus.map((m, i) =>
           !m.have_submenu ? (
@@ -37,7 +45,7 @@ export default function AdminSidebar() {
               <div className="w-11 h-11 flex items-center justify-center">
                 <i className={`fa-light fa-${m.icon}`}></i>
               </div>
-              <div className="font-sm">{m.name}</div>
+              <div className="font-sm text-xs text-gray-300">{m.name}</div>
             </Link>
           ) : (
             <div className="flex flex-col" key={i}>
@@ -63,6 +71,22 @@ export default function AdminSidebar() {
             </div>
           )
         )}
+      <div className="mt-auto w-full p-2 flex gap-2 bg-blue-500 rounded-xl items-center">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full overflow-hidden">
+          <picture>
+            <img
+              src={
+                "https://secure.gravatar.com/avatar/e5d559aa821d4d66798a76007effd1d9?s=512&d=mm&r=g"
+              }
+              alt=""
+            />
+          </picture>
+        </div>
+        <div className="text-xs">Faizun Musthofa</div>
+        <div className="w-8 h-8 ml-auto bg-blue-600 hover:bg-blue-700 cursor-pointer transition-all duration-100 ease-in-out flex items-center justify-center rounded-lg">
+          <i className="fa-light fa-arrow-right-from-bracket"></i>
+        </div>
+      </div>
     </div>
   );
 }
