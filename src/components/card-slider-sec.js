@@ -22,7 +22,7 @@ export default function CardSliderSec({ d, i, currentIndex }) {
         <div
           className={`${
             i === currentIndex ? "w-[400px] h-auto" : "w-[0px] h-[0px]"
-          } overflow-hidden flex flex-col text-xs transition-all duration-500 ease-in-out text-gray-300`}
+          } overflow-hidden flex flex-col text-xs transition-all duration-500 ease-in-out text-gray-300 gap-1`}
         >
           <div className="grid grid-cols-12">
             <div className="w-full h-12 flex items-center px-4 col-span-4">

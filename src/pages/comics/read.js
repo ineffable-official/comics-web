@@ -13,12 +13,13 @@ export default function ReadPage() {
   const [comic, setComic] = useState({});
   const scrollableDivRef = useRef(null);
   const [token, setToken] = useState();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [newVisit, setNewVisit] = useState(false);
   const [userLoad, setUserLoad] = useState(false);
 
   const getUser = useCallback((tkn) => {
     if (!tkn) {
+      setUserLoad(true);
       return;
     }
 
@@ -106,26 +107,20 @@ export default function ReadPage() {
             setChapter(res.data.data);
             getChapNum(res.data.data.comic);
             getComicInfo(res.data.data.comic);
-            setTimeout(() => {
-              if (userLoad) {
-                if (!newVisit) {
-                  if (user) {
-                    if (user.id) {
-                      newVisitor(res.data.data.comic, user.id);
-                    } else {
-                      newVisitor(res.data.data.comic);
-                    }
-                  }
-                }
+            if (userLoad) {
+              if (user) {
+                newVisitor(res.data.data.comic, user.id);
+              } else {
+                newVisitor(res.data.data.comic);
               }
-            }, 3000);
+            }
           }
         })
         .catch((err) => {
           throw err;
         });
     },
-    [router, user, getChapNum, newVisitor, getComicInfo, newVisit, userLoad]
+    [router, getChapNum, getComicInfo, userLoad, newVisitor, user]
   );
 
   const getNext = (currentNum) => {
@@ -171,14 +166,14 @@ export default function ReadPage() {
   };
 
   useEffect(() => {
-    getChapter(router.query.chapid);
-  }, [getChapter, router.query.chapid]);
+    getUser(token);
+  }, [getUser, token]);
 
   useEffect(() => {
-    if (token) {
-      getUser(token);
+    if (userLoad) {
+      getChapter(router.query.chapid);
     }
-  }, [getUser, token]);
+  }, [getChapter, router.query.chapid, userLoad]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {};

@@ -39,10 +39,10 @@ export default function Card({ data }) {
             lastChapter.map((c) => (
               <Link
                 href={"/comics/read?chapid=" + c.id}
-                className="w-full h-auto py-1 px-2 text-[0.7rem] bg-[rgba(255,255,255,0.25)] rounded-lg hover:bg-[rgba(255,255,255,0.5)] transition-all duration-100 ease-in-out"
+                className="w-full h-auto py-1 px-2 text-[0.7rem] bg-[rgba(255,255,255,0.25)] rounded-lg hover:bg-[rgba(255,255,255,0.5)] transition-all duration-100 ease-in-out text-center"
                 key={c.id}
               >
-                {`Chapter ${c.chap_num}`}
+                {`${c.chap_num}`}
               </Link>
             ))}
         </div>
